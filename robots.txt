@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /conectores/
+
+# Permitir explícitamente motores de búsqueda de IA y respuestas generativas
+User-agent: Google-Extended
+Allow: /conectores/
+
+User-agent: GPTBot
+Allow: /conectores/
+
+User-agent: ClaudeBot
+Allow: /conectores/
+
+User-agent: PerplexityBot
+Allow: /conectores/
+
+Sitemap: https://dev.0xsamuraios.com/conectores/sitemap.xml

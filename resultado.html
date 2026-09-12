@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cimiento — Tu resultado del diagnóstico</title>
+<meta name="description" content="Resultado confidencial de tu diagnóstico operativo con Cimiento.">
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="https://dev.0xsamuraios.com/conectores/resultado.html">
+
+<!-- Metadatos de previsualización limpia para WhatsApp / Redes -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_MX">
+<meta property="og:site_name" content="Cimiento">
+<meta property="og:title" content="Cimiento — Tu resultado del diagnóstico operativo">
+<meta property="og:description" content="Revisa tu nivel de riesgo operativo y las recomendaciones personalizadas para tu giro.">
+<meta property="og:url" content="https://dev.0xsamuraios.com/conectores/resultado.html">
+<meta property="og:image" content="https://dev.0xsamuraios.com/conectores/og-image.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,500;0,600;0,700;0,800;0,900;1,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#080706;
+    --paper:#F5F2EB;
+    --panel:#171512;
+    --accent:#941B1B;              /* Rojo SamuraiOS */
+    --accent2:#B32424;
+    --muted:rgba(245, 242, 235, 0.62);
+    --line:rgba(245, 242, 235, 0.18);
+    --line-strong:rgba(245, 242, 235, 0.4);
+    --cream:#F5F2EB;
+    --near-black:#100E0B;
+    --danger:#B83226;
+    --warn:#E8C34C;
+    --good:#6FD89A;
+    --display:"Archivo", ui-sans-serif, system-ui, sans-serif;
+    --mono:"IBM Plex Mono", ui-monospace, monospace;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--ink); color:var(--paper);
+    font-family:var(--display); line-height:1.4; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:0 24px;}
+  .mono{font-family:var(--mono);}
+  header{padding:40px 0 28px; border-bottom:1px solid var(--line);}
+  .logo{font-family:"Iowan Old Style","Times New Roman",Georgia,serif; font-size:22px; font-weight:700; color:var(--paper);}
+  .eyebrow{font-family:var(--mono); font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--accent2); margin-top:10px;}
+  .for-name{font-size:13px; color:var(--muted); margin-top:6px;}
+
+  section{padding:36px 0; border-bottom:1px solid var(--line);}
+  section:last-of-type{border-bottom:none;}
+
+  .tag{display:inline-block; font-family:var(--mono); font-size:11px; font-weight:700; letter-spacing:0.05em; padding:8px 14px; border-radius:999px; color:var(--ink); margin-bottom:18px;}
+  .tag.alto{background:var(--danger);}
+  .tag.medio{background:var(--warn);}
+  .tag.bajo{background:var(--good);}
+  h1{font-size:clamp(24px,4vw,32px); font-weight:800; line-height:1.2; margin:0 0 14px;}
+  .desc{font-size:15px; color:var(--muted); max-width:60ch; margin:0;}
+
+  .score-label{font-family:var(--mono); font-size:11px; color:var(--muted); margin:26px 0 8px;}
+  .score-track{height:10px; background:rgba(245,242,235,0.14); border-radius:6px; overflow:hidden;}
+  .score-fill{height:100%; border-radius:6px;}
+  .score-fill.alto{background:var(--danger);}
+  .score-fill.medio{background:var(--warn);}
+  .score-fill.bajo{background:var(--good);}
+
+  .industry-box{background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:22px 24px;}
+  .industry-box .tag-label{font-family:var(--mono); font-size:11px; font-weight:700; letter-spacing:0.05em; color:var(--accent2); margin-bottom:10px; display:block;}
+  .industry-box p{margin:0; font-size:14px; color:var(--muted); line-height:1.6;}
+
+  h2.section-title{font-size:20px; font-weight:800; margin:0 0 6px; color:var(--paper);}
+  .section-lede{font-size:13.5px; color:var(--muted); margin:0 0 26px;}
+
+  .cards{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  .card{border-radius:14px; padding:26px 24px; border:1.5px solid var(--accent2);}
+  .card.light{background:var(--cream); color:var(--near-black);}
+  .card.dark{background:#000; color:var(--paper);}
+  .card h3{font-size:15px; font-weight:800; margin:0 0 8px; letter-spacing:0.02em;}
+  .card .sub{font-size:12.5px; margin:0 0 14px; opacity:0.75;}
+  .card .price{font-size:17px; font-weight:800; color:var(--accent2); margin-bottom:2px;}
+  .card .price-note{font-size:11.5px; opacity:0.65; margin-bottom:16px;}
+  .card ul{list-style:none; margin:0; padding:0; display:grid; gap:9px;}
+  .card li{font-size:12.5px; line-height:1.5; padding-left:16px; position:relative;}
+  .card li::before{content:"●"; color:var(--accent2); position:absolute; left:0; font-size:8px; top:5px;}
+
+  .cta-box{text-align:center; padding:44px 0 8px;}
+  .cta-box p{font-size:14px; color:var(--muted); max-width:44ch; margin:0 auto 20px;}
+  .cta-btn{
+    display:inline-flex; align-items:center; gap:8px; background:var(--accent2); color:var(--paper);
+    font-weight:700; font-size:15px; padding:16px 30px; border-radius:999px; text-decoration:none;
+    border:none; cursor:pointer; font-family:inherit;
+  }
+  .cta-btn:hover{opacity:0.92;}
+
+  .empty-state{padding:80px 0; text-align:center;}
+  .empty-state p{color:var(--muted); font-size:15px; max-width:44ch; margin:0 auto 20px;}
+  .empty-state a{color:var(--accent2); font-weight:600;}
+
+  footer{padding:28px 0 48px; text-align:center;}
+  footer p{font-size:11.5px; color:var(--muted); font-family:var(--mono);}
+
+  @media (max-width:600px){ .cards{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+
+<div id="app"></div>
+
+<script>
+  const RESULT_COPY = {
+    alto: {
+      tag: 'RIESGO ALTO',
+      title: 'Hoy opera prácticamente a ciegas.',
+      desc: 'La mayoría de sus decisiones se basan en memoria e impresión, no en datos verificables. Es el perfil donde una auditoría suele revelar más dinero perdido del que se imagina — y donde más rápido se nota el cambio.',
+      fill: 34
+    },
+    medio: {
+      tag: 'RIESGO MEDIO',
+      title: 'Tiene partes del negocio bajo control — y puntos ciegos reales.',
+      desc: 'Ya mide algunas cosas, pero probablemente hay decisiones importantes (qué canal rentabiliza, si retiene clientes) que hoy se responden a ojo. Un diagnóstico completo dice exactamente dónde están los huecos.',
+      fill: 66
+    },
+    bajo: {
+      tag: 'RIESGO BAJO',
+      title: 'Ya tiene más visibilidad que la mayoría de las PyMEs.',
+      desc: 'El negocio ya opera con cierta disciplina de datos. La pregunta ya no es "si" necesita un sistema, sino si el que tiene hoy escala sin depender de que una sola persona lo sostenga todo.',
+      fill: 92
+    }
+  };
+
+  const INDUSTRY_LABELS = { retail: "Retail o comercio", servicios: "Servicios profesionales", manufactura: "Manufactura o producción", distribucion: "Distribución o logística", otro: "Otro giro" };
+  const INDUSTRY_COPY = {
+    retail: "En tiendas y comercios, lo común es perder dinero por mercancía que falta en bodega y descuentos que los vendedores dan sin registrar — dinero que se escapa sin que nadie se dé cuenta.",
+    servicios: "En servicios y despachos, lo común es regalar horas de trabajo que nunca se le cobran al cliente y olvidar darle seguimiento a cotizaciones que ya estaban casi cerradas.",
+    manufactura: "En talleres y producción, el problema suele ser el material desperdiciado y los tiempos muertos que todos asumen como 'normales', pero que encarecen cada pedido.",
+    distribucion: "En distribución y entregas, el margen se pierde cuando no sabes con exactitud cuánto te cuesta mandar una camioneta a cada zona o a cada cliente.",
+    otro: "En este tipo de negocio, el riesgo está en fijar precios o hacer compras basándose en corazonadas en vez de saber con certeza cuánto dinero queda libre."
+  };
+
+  const CIMIENTO_WHATSAPP = "525519514861";
+
+  function esc(s){ const d = document.createElement('div'); d.textContent = s == null ? '' : s; return d.innerHTML; }
+
+  function render(){
+    const p = new URLSearchParams(location.search);
+    const nivel = p.get('nivel');
+    const giro = p.get('giro') || 'otro';
+    const total = p.get('total');
+    const max = p.get('max');
+    const nombre = p.get('nombre') || '';
+
+    const app = document.getElementById('app');
+
+    if (!nivel || !RESULT_COPY[nivel]) {
+      app.innerHTML =
+        '<div class="wrap"><div class="empty-state">' +
+          '<p>Este link de resultado no tiene un diagnóstico válido asociado, o el link está incompleto.</p>' +
+          '<a href="https://dev.0xsamuraios.com/conectores/">← Hacer el diagnóstico de Cimiento</a>' +
+        '</div></div>';
+      return;
+    }
+
+    const r = RESULT_COPY[nivel];
+    const industryLabel = INDUSTRY_LABELS[giro] || INDUSTRY_LABELS.otro;
+    const industryCopy = INDUSTRY_COPY[giro] || INDUSTRY_COPY.otro;
+    const scoreLine = (total && max) ? ('Puntaje: ' + esc(total) + ' / ' + esc(max)) : '';
+
+    const waMsg = 'Hola, soy ' + (nombre || 'un visitante') + '. Vi mi resultado de Cimiento (' + r.tag + ', giro: ' + industryLabel + ') y me gustaría platicar de una auditoría completa.';
+    const waUrl = 'https://wa.me/' + CIMIENTO_WHATSAPP + '?text=' + encodeURIComponent(waMsg);
+
+    app.innerHTML =
+      '<header><div class="wrap">' +
+        '<div class="logo" style="display: flex; align-items: center; gap: 8px;">' +
+          '<span style="border: 2px solid var(--accent); color: var(--accent); padding: 0 4px; border-radius: 4px; font-weight: 900;">侍</span>' +
+          '<span>Cimiento</span>' +
+        '</div>' +
+        '<div class="eyebrow">Diagnóstico operativo — resultado</div>' +
+        (nombre ? '<div class="for-name">Para ' + esc(nombre) + '</div>' : '') +
+      '</div></header>' +
+
+      '<section><div class="wrap">' +
+        '<span class="tag ' + nivel + '">' + esc(r.tag) + '</span>' +
+        '<h1>' + esc(r.title) + '</h1>' +
+        '<p class="desc">' + esc(r.desc) + '</p>' +
+        (scoreLine ? (
+          '<div class="score-label mono">' + esc(scoreLine) + '</div>' +
+          '<div class="score-track"><div class="score-fill ' + nivel + '" style="width:' + r.fill + '%;"></div></div>'
+        ) : '') +
+      '</div></section>' +
+
+      '<section><div class="wrap">' +
+        '<div class="industry-box">' +
+          '<span class="tag-label">PARA SU GIRO — ' + esc(industryLabel.toUpperCase()) + '</span>' +
+          '<p>' + esc(industryCopy) + '</p>' +
+        '</div>' +
+      '</div></section>' +
+
+      '<section><div class="wrap">' +
+        '<h2 class="section-title">Así ayuda Cimiento en este caso</h2>' +
+        '<p class="section-lede">Dos formas de trabajar juntos — se cotiza según la complejidad real de la operación.</p>' +
+        '<div class="cards">' +
+          '<div class="card light">' +
+            '<h3>CIMIENTO CORE</h3>' +
+            '<p class="sub">Una sola herramienta que ordena la operación.</p>' +
+            '<div class="price">$100,000 MXN</div>' +
+            '<div class="price-note">instalación + $30,000 MXN/mes</div>' +
+            '<ul>' +
+              '<li>Un solo sistema para ventas, finanzas y operación</li>' +
+              '<li>Reportes reales, sin armarlos a mano cada semana</li>' +
+              '<li>Monitoreo mensual cancelable, sin contrato forzoso</li>' +
+              '<li>Ideal con un canal y un equipo principal</li>' +
+            '</ul>' +
+          '</div>' +
+          '<div class="card dark">' +
+            '<h3>CIMIENTO DIRECCIÓN</h3>' +
+            '<p class="sub">Cimiento Core + soluciones a la medida.</p>' +
+            '<div class="price">Cotización según complejidad</div>' +
+            '<div class="price-note">se cotiza aparte, sobre Cimiento Core</div>' +
+            '<ul>' +
+              '<li>Todo lo de Cimiento Core, más gobernanza directiva</li>' +
+              '<li>Soluciones a la medida: IA, automatizaciones, agentes</li>' +
+              '<li>Ritmo de decisión más alto, acompañamiento cercano</li>' +
+              '<li>Ideal con más de un canal, unidad o equipo</li>' +
+            '</ul>' +
+          '</div>' +
+        '</div>' +
+      '</div></section>' +
+
+      '<section><div class="wrap">' +
+        '<div class="cta-box">' +
+          '<p>¿Con cuál empezamos? Responda este resultado por WhatsApp y un asesor lo contacta hoy mismo.</p>' +
+          '<a class="cta-btn" href="' + waUrl + '" target="_blank" rel="noopener noreferrer">Hablar con un asesor →</a>' +
+        '</div>' +
+      '</div></section>' +
+
+      '<footer><div class="wrap"><p>CIMIENTO · Este resultado es un ejercicio orientativo, no un diagnóstico contable o financiero formal.</p></div></footer>';
+  }
+
+  render();
+</script>
+
+</body>
+</html>
